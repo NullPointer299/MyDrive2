@@ -1,0 +1,44 @@
+version: '3.3'
+
+services:
+
+  nginx:
+    build: ./servers/nginx/
+    image: mydrive2-nginx-image
+    #restart: always
+    container_name: mydrive2-nginx
+    depends_on:
+      - tomcat
+    networks:
+      - app-net
+    ports:
+      - "80:8080"
+
+  tomcat:
+    build: ./servers/tomcat/
+    image: mydrive2-tomcat-image
+    #restart: always
+    container_name: mydrive2-tomcat
+    depends_on:
+      - mysql
+    networks:
+      - app-net
+    volumes:
+      - ./out/MyDrive2:/usr/local/tomcat/webapps
+
+  mysql:
+    build: ./servers/mysql/
+    image: mydrive2-mysql-image
+    #restart: always
+    container_name: mydrive2-mysql
+    networks:
+      - app-net
+    environment:
+      MYSQL_DATABASE: MyDrive2
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./servers/mysql/data:/var/lib/mysql
+
+networks:
+  app-net:
+    driver: bridge

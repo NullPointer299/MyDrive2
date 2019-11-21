@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="MyDrive2">
+    <output-path>$PROJECT_DIR$/docker/out/MyDrive2</output-path>
+    <root id="archive" name="MyDrive2.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="MyDrive2" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="file-copy" path="$PROJECT_DIR$/lib/gson-2.8.6.jar" />
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/javax.mail.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/mysql-connector-java-8.0.17.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/tomcat-jdbc-8.5.32.jar" />
+          <element id="file-copy" path="$PROJECT_DIR$/lib/tomcat-juli-8.5.32.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="MyDrive2/web/Web" />
+    </root>
+  </artifact>
+</component>

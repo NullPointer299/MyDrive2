@@ -1,0 +1,94 @@
+@charset "UTF-8";
+@import 'tops.css';
+header {
+  font-size: 3em;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body div.row div.form_container {
+  position: relative;
+  height: 60px;
+  width: 400px;
+  margin: 30px 0;
+}
+body div.row div.form_container label {
+  background-color: white;
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  padding: 0;
+  font-size: 1.9em;
+  text-transform: none;
+  transition: top 0.2s linear, font-size 0.2s linear;
+}
+body div.row div.form_container label.active {
+  top: -10px;
+  font-size: 1.2em;
+  text-transform: uppercase;
+}
+body div.row div.form_container input {
+  min-width: 200px;
+  border: 2px black solid;
+  background-color: transparent;
+  height: 60px;
+  width: 400px;
+  padding: 5px;
+  font-size: 1.5em;
+  outline-color: orange;
+  /*フォーカス時のアウトランを削除*/
+}
+body div.row div.form_container span.pass_icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+body div.row div.form_container span.pass_icon a {
+  text-decoration: none;
+  width: 35.19px;
+  height: 35.19px;
+  outline: none;
+}
+body div.row div.form_container span.pass_icon a i {
+  font-size: 2.2em;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
+p {
+  margin: 0;
+}
+
+/*ipad 未満のサイズでの表示*/
+@media (max-width: 767px) {
+  body {
+    font-size: 12px;
+  }
+
+  .form_container, input {
+    width: 70vw;
+    height: 45px;
+  }
+
+  .pass_icon {
+    height: 45px;
+    width: 45px;
+  }
+
+  .pass_icon a {
+    height: 26.39px;
+    width: 26.39px;
+  }
+}
+
+/*# sourceMappingURL=login.css.map */
