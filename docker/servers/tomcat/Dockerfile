@@ -1,4 +1,4 @@
-FROM tomcat:latest
+FROM tomcat:8
 
 ADD ./conf/ /usr/local/tomcat/conf/
 ADD ./lib/ /usr/local/tomcat/lib/
