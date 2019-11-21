@@ -11,7 +11,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.war
 *.nar
 *.ear
 *.zip
@@ -22,7 +21,5 @@
 hs_err_pid*
 
 out
-
-docker/out
 
 docker/servers/mysql/data
