@@ -29,11 +29,11 @@ public class JsonRequestResult implements Jsonable<JsonRequestResult.Encoded> {
 
     public class Encoded implements Encodable {
 
-        private final boolean _valid;
+        private final String _valid;
         private final String message;
 
         Encoded(final JsonRequestResult requestResult) {
-            this._valid = requestResult._valid;
+            this._valid = String.valueOf(requestResult._valid);
             this.message = encode(requestResult.message);
         }
     }

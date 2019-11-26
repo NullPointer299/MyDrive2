@@ -1,6 +1,8 @@
 <%@ page import="model.dto.tree.TreeManagement" %>
 <%@ page import="model.dto.user.User" %>
-<%@ page import="model.util.servlet.ServletUtil" %><%--
+<%@ page import="controller.util.ServletUtil" %>
+<%@ page import="attribute.AttrJsp" %>
+<%@ page import="attribute.AttrServlet" %><%--
   Created by IntelliJ IDEA.
   User: nullpo299
   Date: 2019/09/23
@@ -9,7 +11,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
-    final String SERVLET_LOGOUT = ServletUtil.getSERVLET_LOGOUT(true);
     final User user = (User) session.getAttribute("USER");
     final TreeManagement tm = ((TreeManagement) session.getAttribute("TREE_MANAGEMENT"));
     System.out.println(tm.getSubTree().toJson().replaceAll("\"", "\\\\\"")); //TODO debug code here.
@@ -39,7 +40,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!-- 自分のcss , js の読み込み-->
     <script>
-        const origin_tree = JSON.parse("{\"1\":[{\"id\":\"2\",\"parentId\":\"1\",\"name\":\"nullpo299\",\"isDirectory\":\"true\"}],\"2\":[{\"id\":\"3\",\"parentId\":\"2\",\"name\":\"super\",\"isDirectory\":\"true\"},{\"id\":\"6\",\"parentId\":\"2\",\"name\":\"outfile\",\"isDirectory\":\"false\"}],\"3\":[{\"id\":\"4\",\"parentId\":\"3\",\"name\":\"multi\",\"isDirectory\":\"true\"}],\"4\":[{\"id\":\"5\",\"parentId\":\"4\",\"name\":\"otinpo\",\"isDirectory\":\"true\"}]}");
+        const origin_tree = JSON.parse("<%=tm.getSubTree().toJson().replaceAll("\"", "\\\\\"")%>");
         const rootId = decodeURI(origin_tree["1"]["0"].id);
     </script>
     <script src="../myJs/upload.js"></script>
@@ -72,7 +73,7 @@
             </a>
         </span>
         <span class="setting-items" id="logout">
-            <a href="<%=SERVLET_LOGOUT%>">
+            <a href="<%=AttrServlet.LOGOUT.getUrl(true)%>">
                 <i class="material-icons">exit_to_app</i>
             </a>
         </span>

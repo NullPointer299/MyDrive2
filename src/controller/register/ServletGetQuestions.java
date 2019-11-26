@@ -1,8 +1,7 @@
 package controller.register;
 
 import model.dto.question.QuestionsFactory;
-import model.util.servlet.ServletUtil;
-import model.wrap.AjaxHttpServlet;
+import controller.wrapper.AsynchronousHttpServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,14 +11,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "ServletGetQuestions", urlPatterns = "/GetQuestions/")
-public class ServletGetQuestions extends AjaxHttpServlet {
-
-    private final String SERVLET_LOGIN = ServletUtil.getSERVLET_LOGIN(true);
+public class ServletGetQuestions extends AsynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletGetQuestions!!!");
         try {
-            initialServlet(request);
+            notLoggedInIfLogin(request, response);
             final String jsonResponse = QuestionsFactory.create().toJson();
             sendJsonResponse(response, jsonResponse);
         } catch (SQLException e) {
@@ -30,6 +27,6 @@ public class ServletGetQuestions extends AjaxHttpServlet {
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletGetQuestions!!!");
-        throw new IllegalStateException("Not implemented!");
+        notLoggedInIfLogin(request, response);
     }
 }

@@ -1,84 +1,68 @@
 // ログイン処理
 package controller.login;
 
+import attribute.AttrCookie;
+import attribute.AttrJsp;
+import attribute.AttrServlet;
+import controller.wrapper.SynchronousHttpServlet;
+import model.dto.cookie.CookieFactory;
 import model.dto.user.User;
 import model.dto.user.UserFactory;
 import model.util.login.Login;
-import model.util.servlet.ServletUtil;
+import controller.util.ServletUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.sql.SQLException;
 
 @WebServlet(name = "Login", urlPatterns = "/Login/")
-public class ServletLogin extends HttpServlet {
-
-    private final String JSP_LOGIN = ServletUtil.getJSP_LOGIN();
-    private final String SERVLET_MAIN = ServletUtil.getSERVLET_MAIN(false);
-
-    private final String COOKIE_LOGIN = ServletUtil.getCOOKIE_LOGIN();
-
-    private final String UTF_8 = ServletUtil.getUTF_8();
+public class ServletLogin extends SynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        // 認証できたらCookie発行する
-        // 異常な場合はlogin.jspに遷移
         System.out.println("[POST]ServletLogin!!!");
-        request.setCharacterEncoding(UTF_8);
+        setCharacterEncodingUtf8(request);
         final String userId = request.getParameter("user-id");
         final String password = request.getParameter("password");
         String url;
         if (ServletUtil.nullCheck(userId, password)) {
-            // パラメータ正常時
             try {
                 final Login login = new Login(userId, password);
+                System.out.println("login: " + login.isSuccess());    // TODO debug code here.
                 if (login.isSuccess()) {
-                    // ログイン成功時
                     final User user = login.getUser();
-                    final Cookie cookie = new Cookie(COOKIE_LOGIN, URLEncoder.encode(user.toJson(), UTF_8));
-                    cookie.setMaxAge(60 * 60 * 24);    // 24時間保持する
-                    cookie.setPath("/MyDrive2");
+                    final Cookie cookie = CookieFactory.create(AttrCookie.LOGIN, user.toJson());
                     final HttpSession session = request.getSession();
                     session.setAttribute("USER", user);
                     response.addCookie(cookie);
-                    url = SERVLET_MAIN;
+                    // リダイレクトだからtrue
+                    url = AttrServlet.MAIN.getUrl(true);
+                    response.sendRedirect(url);
                 } else {
-                    // ログイン失敗時
-                    url = JSP_LOGIN;
+                    request.getRequestDispatcher(AttrJsp.LOGIN.getUrl()).forward(request, response);
                 }
             } catch (SQLException e) {
-                // データベース例外
-                // 503ページに遷移？
+                //  TODO 503ページに遷移？
                 e.printStackTrace();
                 url = "503page";
             }
         } else {
-            // パラメータ異常
-            url = JSP_LOGIN;
+            request.getRequestDispatcher(AttrJsp.LOGIN.getUrl()).forward(request, response);
         }
-        request.getRequestDispatcher(url).forward(request, response);
     }
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        // CookieがあればHomeへ
-        // なければLoginへ
         System.out.println("[GET]ServletLogin!!!");
-        request.setCharacterEncoding(UTF_8);
+        setCharacterEncodingUtf8(request);
         final Cookie[] cookies = request.getCookies();
-        final Cookie cookie = ServletUtil.findCookieOrNull(cookies, COOKIE_LOGIN);
-        String url;
-        if (cookie == null) {
-            //url = JSP_LOGIN;
-            url="/WEB-INF/login.jsp";
-        } else {
+        final Cookie cookie = CookieFactory.findCookieOrNull(cookies, AttrCookie.LOGIN);
+        if (cookie != null) {
             request.getSession().setAttribute("USER",
-                    UserFactory.createFromJson(URLDecoder.decode(cookie.getValue(), UTF_8)));
-            url = SERVLET_MAIN;
+                    UserFactory.create(URLEncode(cookie.getValue())));
+            // リダイレクトだからtrue
+            response.sendRedirect(AttrServlet.MAIN.getUrl(true));
         }
-        request.getRequestDispatcher(url).forward(request, response);
+        request.getRequestDispatcher(AttrJsp.LOGIN.getUrl()).forward(request, response);
     }
 }

@@ -1,13 +1,13 @@
 package model.dto.mail;
 
 import com.google.gson.Gson;
-import model.util.servlet.ServletUtil;
+import controller.util.ServletUtil;
 
 public class MailFactory {
 
     private static final Gson GSON = ServletUtil.getGSON();
 
-    public static Mail createFromJson(final String json) {
+    public static Mail createMail(final String json) {
         return GSON.fromJson(json, Mail.class);
     }
 }

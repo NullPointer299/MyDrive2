@@ -45,13 +45,13 @@ public class SubFile {
         final String id;
         final String parentId;
         final String name;
-        final boolean isDirectory;
+        final String isDirectory;
 
         Encoded(SubFile treeFile) {
             this.id = encode(treeFile.id);
             this.parentId = encode(treeFile.parentId);
             this.name = encode(treeFile.name);
-            this.isDirectory = treeFile.isDirectory;
+            this.isDirectory = String.valueOf(treeFile.isDirectory);
         }
 
         @Override

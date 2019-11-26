@@ -1,7 +1,7 @@
 package model.dto.check;
 
 import com.google.gson.Gson;
-import model.util.servlet.ServletUtil;
+import controller.util.ServletUtil;
 
 public class UserIDFactory {
 

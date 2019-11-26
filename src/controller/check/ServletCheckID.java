@@ -4,7 +4,7 @@ import model.dto.check.UserID;
 import model.dto.check.UserIDFactory;
 import model.dto.response.JsonFactory;
 import model.util.check.Check;
-import model.wrap.AjaxHttpServlet;
+import controller.wrapper.AsynchronousHttpServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,12 +14,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 @WebServlet(name = "ServletCheckID", urlPatterns = "/CheckID/")
-public class ServletCheckID extends AjaxHttpServlet {
+public class ServletCheckID extends AsynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletCheckID!!!");
+        notLoggedInIfLogin(request, response);
         try {
-            initialServlet(request);
             final UserID userID =
                     UserIDFactory.createCheckID(receiveJsonRequest(request));
             final String jsonResponse =
@@ -33,6 +33,6 @@ public class ServletCheckID extends AjaxHttpServlet {
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletCheckID!!!");
-        throw new IllegalStateException("Not implemented!!!");
+        notLoggedInIfLogin(request, response);
     }
 }

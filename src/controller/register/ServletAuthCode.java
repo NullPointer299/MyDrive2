@@ -3,7 +3,7 @@ package controller.register;
 import model.dto.code.Code;
 import model.dto.code.CodeFactory;
 import model.dto.response.JsonFactory;
-import model.wrap.AjaxHttpServlet;
+import controller.wrapper.AsynchronousHttpServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "ServletAuthCode", urlPatterns = "/AuthCode/")
-public class ServletAuthCode extends AjaxHttpServlet {
+public class ServletAuthCode extends AsynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletAuthCode!!!");
-        initialServlet(request);
+        notLoggedInIfLogin(request, response);
         final String jsonRequest = receiveJsonRequest(request);
-        final Code code = CodeFactory.createFromJson(jsonRequest);
+        final Code code = CodeFactory.create(jsonRequest);
         final boolean status =
                 code.equals((request.getSession().getAttribute("CODE")));
         final String jsonResponse = JsonFactory.createRequestResult(status).toJson();

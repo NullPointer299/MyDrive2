@@ -68,7 +68,7 @@ public class User implements Jsonable<User.Encoded> {
         private final String lastName;
         private final String nickname;
         private final String emailAddress;
-        private final boolean openness;
+        private final String openness;
 
         Encoded(final User user) {
             this.userId = encode(user.userId);
@@ -76,7 +76,7 @@ public class User implements Jsonable<User.Encoded> {
             this.lastName = encode(user.lastName);
             this.nickname = encode(user.nickname);
             this.emailAddress = encode(user.emailAddress);
-            this.openness = user.openness;
+            this.openness = String.valueOf(user.openness);
         }
     }
 }

@@ -1,7 +1,7 @@
 package model.dto;
 
 import com.google.gson.Gson;
-import model.util.servlet.ServletUtil;
+import controller.util.ServletUtil;
 
 @SuppressWarnings("SpellCheckingInspection")
 public interface Jsonable<T extends Encodable> {

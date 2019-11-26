@@ -1,7 +1,7 @@
 package model.dto.user;
 
 import com.google.gson.Gson;
-import model.util.servlet.ServletUtil;
+import controller.util.ServletUtil;
 
 public class UserFactory {
 
@@ -12,7 +12,7 @@ public class UserFactory {
         return new User(id, userId, firstName, lastName, nickname, emailAddress, openness);
     }
 
-    public static User createFromJson(final String json) {
+    public static User create(final String json) {
         return GSON.fromJson(json, User.class);
     }
 }

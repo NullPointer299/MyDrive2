@@ -1,7 +1,7 @@
 package model.dto.code;
 
 import com.google.gson.Gson;
-import model.util.servlet.ServletUtil;
+import controller.util.ServletUtil;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -17,7 +17,7 @@ public class CodeFactory {
         return new Code(generateAuthCode());
     }
 
-    public static Code createFromJson(final String json) {
+    public static Code create(final String json) {
         return GSON.fromJson(json, Code.class);
     }
 
