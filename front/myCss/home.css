@@ -152,7 +152,7 @@ main.home div.content div.breadcrumbs-area {
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs {
   height: 100%;
-  margin: 0;
+  margin-top: 2px;
   list-style: none;
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item {
@@ -171,6 +171,7 @@ main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item:no
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item a {
   text-decoration: none;
+  color: royalblue;
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs li.current a {
   color: darkgray;

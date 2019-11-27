@@ -23,7 +23,7 @@ $(function () {
                 mail = $('#Mail').val();
                 last = $('#Last').val();
                 first = $('#First').val();
-                const json_data = {"emailAddress": mail, "lastName": last, "firstName": first};
+                const json_data = {"emailAddress": mail, "lastName": last, "firstName": first,"token":token};
                 if (mail.match('\\w+@\\w+') != null && last && first) { //フォームの中身が空では無かった且つメールアドレスの正しい構成で合った場合
                     const loader = $('.loader-wrap');
                     loader.css('display', 'flex');
@@ -34,6 +34,7 @@ $(function () {
                         data: JSON.stringify(json_data)
                     }).done(function (data) {
                         if (data._valid) { //メアドが使えるものかを判定
+                            token = decodeURI(data.token)
                             forward_progress_form();
                             const email = $('#Email');
                             const next = email.next();
@@ -77,11 +78,13 @@ $(function () {
                         type: "post",
                         dataType: "json",
                         data: JSON.stringify({
-                            "code": codes
+                            "code": codes,
+                            "token":token
                         })
                     }).done(function (data) {
                         const certification = $('#Certification');
                         const next = certification.next();
+                        token = decodeURI(data.token);
                         if (data._valid) {
                             forward_progress_form();
                             move_step(
@@ -117,9 +120,13 @@ $(function () {
                         url: "/MyDrive2/GetQuestions/",
                         type: "post",
                         dataType: "json",
+                        data:JSON.stringify({
+                            "token":token
+                        })
                     }).done(function (data) {
                         const secret_question = data.questions;
                         forward_progress_form();
+                        token = decodeURI(data.token);
                         const settings = $('#Settings');
                         const next = settings.next();
                         move_step(
@@ -141,13 +148,10 @@ $(function () {
                             });
                     });
                 }
-
                 break;
-
             case "Secret<br>Question" :
                 select = $('#select-menu').val();
                 answer = $('#answer').val();
-
                 forward_progress_form();
                 const secret_question = $('#Secret-question');
                 const next = secret_question.next();
