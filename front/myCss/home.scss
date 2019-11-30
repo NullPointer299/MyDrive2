@@ -1,0 +1,357 @@
+main.home {
+  display: flex;
+  flex-direction: row;
+
+  div#resize {
+    width: 100px;
+    height: 100%;
+    border-right: 1px lightgray solid;
+    user-select: none;
+
+    p#tree-comment {
+      position: absolute;
+      background-color: white;
+      font-size: 12px;
+      z-index: 100;
+      box-shadow: 0 0 3px black;
+      padding: 0 4px;
+    }
+
+    ul {
+      list-style: none;
+      display: none;
+
+      &.root {
+        display: block;
+      }
+
+      &.open {
+        display: block;
+      }
+
+      li {
+        &:not(.root) {
+          margin-left: 15px;
+        }
+
+        a {
+          display: inline-block;
+          position: relative;
+          color: black;
+          text-decoration: none;
+          height: 24px;
+          padding-right: 3px;
+          cursor: pointer;
+
+          &.dir {
+            padding-left: 34px;
+
+            &:before {
+              position: absolute;
+              top: 0px;
+              left: 3px;
+              content: '\f106';
+              font-family: "Font Awesome 5 Free";
+              font-weight: 900;
+            }
+
+            &:after {
+              position: absolute;
+              left: 16px;
+              top: 0;
+              content: '\f07b';
+              font-family: "Font Awesome 5 Free";
+            }
+          }
+
+          &.open {
+            &:before {
+              position: absolute;
+              top: 0px;
+              left: 3px;
+              content: '\f107';
+              font-family: "Font Awesome 5 Free";
+              font-weight: 900;
+            }
+          }
+
+          &.file {
+            padding-left: 17px;
+
+            &:after {
+              content: '\f15b';
+              font-family: "Font Awesome 5 Free";
+              position: absolute;
+              left: 3px;
+              top: 0px;
+            }
+          }
+
+          &:hover {
+            background-color: gainsboro;
+          }
+        }
+      }
+    }
+  }
+
+  div.content {
+    z-index: 0;
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px);
+
+    div.tool-bar {
+      height: 30px;
+      width: 100%;
+      border-bottom: lightgray 1px solid;
+      display: flex;
+
+      span.tool {
+        display: inline-block;
+        height: 100%;
+        min-width: 50px;
+
+        &:hover {
+          background-color: whitesmoke;
+
+          a {
+            color: peru;
+          }
+        }
+
+        a {
+          height: 100%;
+          display: inline-block;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 20px;
+          padding: 0 5px;
+          color: mediumseagreen;
+        }
+
+        ul {
+          list-style: none;
+
+          &.parent {
+            height: 30px;
+
+            a {
+              height: 30px;
+            }
+
+            > li {
+              height: 100%;
+              list-style-type: none;
+
+              ul.dropdwn_menu {
+                position: relative;
+                border-right: 2px solid gainsboro;
+                border-bottom: 2px solid gainsboro;
+                display: none;
+                margin-left: -40px;
+                left: 40px;
+                width: 90px;
+
+                li {
+                  background-color: white;
+                  padding: 0 3px;
+                  box-shadow: 2px 2px 4px gray;
+                  height: 30px;
+                  font-size: 20px;
+                  color: dimgray;
+
+                  &:hover {
+                    background-color: whitesmoke;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    div.breadcrumbs-area {
+      width: 100%;
+      height: 25px;
+      overflow: hidden;
+      z-index: -1;
+
+      ol.breadcrumbs {
+        height: 100%;
+        margin-top: 2px;
+        list-style: none;
+
+        li.breadcrumbs-item {
+          display: inline;
+          margin-left: 10px;
+          position: relative;
+          font-weight: 600;
+
+          &:not(:first-child)::after {
+            content: '/';
+            position: absolute;
+            top: -4px;
+            left: -9px;
+            color: gray;
+            font-weight: 600;
+          }
+
+          a {
+            text-decoration: none;
+            color: royalblue;
+          }
+        }
+
+        li.current {
+          a {
+            color: darkgray;
+            pointer-events: none;
+          }
+        }
+      }
+    }
+
+    div#files-area {
+      height: calc(100% - 55px);
+      display: flex;
+      flex-flow: row wrap;
+      align-content: flex-start;
+      overflow: auto;
+      z-index: -1;
+
+      div.dir {
+        z-index: 1;
+        margin: 10px 20px 0 0;
+        width: 150px;
+        height: 130px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        &:hover {
+          background-color: whitesmoke;
+
+          > label.decorated-box {
+            display: block;
+          }
+        }
+
+        i {
+          height: 80px;
+          width: 80px;
+          position: relative;
+
+          &.fa-file-alt {
+            font-size: 70px;
+            margin-bottom: 10px;
+
+            &:before {
+              position: absolute;
+              top: 10px;
+              left: 15px;
+            }
+          }
+
+          &.fa-folder {
+            font-size: 80px;
+            color: goldenrod;
+          }
+        }
+
+        p {
+          margin: 0;
+          padding: 0 5px;
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          font-family: Roboto;
+          text-align: center;
+          user-select: text;
+        }
+
+        input[type="checkbox"] {
+          display: none;
+
+          &:checked {
+            + label.decorated-box {
+              display: block;
+
+              &:after {
+                width: 5px;
+                transition: width 100ms;
+              }
+
+              &:before {
+                width: 12px;
+                transition: width 100ms 80ms;
+              }
+            }
+          }
+        }
+
+        label.decorated-box {
+          display: none;
+          height: 25px;
+          width: 25px;
+          position: absolute;
+          border: 2px solid lightgray;
+          border-radius: 50%;
+          top: 10px;
+          right: 10px;
+          background-color: white;
+          transition: background-color 500ms ease-in, transform 350ms cubic-bezier(.78, -1.22, .17, 1.89);
+
+          &:before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 6px;
+            width: 0px;
+            height: 2px;
+            background-color: mediumseagreen;
+            transform: rotate(-45deg);
+            transition: width 50ms;
+          }
+
+          &:after {
+            content: '';
+            position: absolute;
+            top: 11px;
+            left: 4px;
+            width: 0px;
+            height: 2px;
+            background-color: mediumseagreen;
+            transform: rotate(45deg);
+            transition: width 50ms 50ms;
+          }
+        }
+      }
+    }
+  }
+
+  div#context-menu {
+    position: absolute;
+    display: none;
+
+    ul {
+      background-color: white;
+      list-style: none;
+      display: inline-block;
+      box-shadow: 0 0 5px gray;
+
+      li {
+        padding: 0 10px;
+
+        &:hover {
+          background-color: gainsboro;
+        }
+      }
+    }
+  }
+}

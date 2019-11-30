@@ -1,0 +1,299 @@
+@charset "UTF-8";
+main.home {
+  display: flex;
+  flex-direction: row;
+}
+main.home div#resize {
+  width: 100px;
+  height: 100%;
+  border-right: 1px lightgray solid;
+  user-select: none;
+}
+main.home div#resize p#tree-comment {
+  position: absolute;
+  background-color: white;
+  font-size: 12px;
+  z-index: 100;
+  box-shadow: 0 0 3px black;
+  padding: 0 4px;
+}
+main.home div#resize ul {
+  list-style: none;
+  display: none;
+}
+main.home div#resize ul.root {
+  display: block;
+}
+main.home div#resize ul.open {
+  display: block;
+}
+main.home div#resize ul li:not(.root) {
+  margin-left: 15px;
+}
+main.home div#resize ul li a {
+  display: inline-block;
+  position: relative;
+  color: black;
+  text-decoration: none;
+  height: 24px;
+  padding-right: 3px;
+  cursor: pointer;
+}
+main.home div#resize ul li a.dir {
+  padding-left: 34px;
+}
+main.home div#resize ul li a.dir:before {
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+main.home div#resize ul li a.dir:after {
+  position: absolute;
+  left: 16px;
+  top: 0;
+  content: "";
+  font-family: "Font Awesome 5 Free";
+}
+main.home div#resize ul li a.open:before {
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+main.home div#resize ul li a.file {
+  padding-left: 17px;
+}
+main.home div#resize ul li a.file:after {
+  content: "";
+  font-family: "Font Awesome 5 Free";
+  position: absolute;
+  left: 3px;
+  top: 0px;
+}
+main.home div#resize ul li a:hover {
+  background-color: gainsboro;
+}
+main.home div.content {
+  z-index: 0;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 40px);
+}
+main.home div.content div.tool-bar {
+  height: 30px;
+  width: 100%;
+  border-bottom: lightgray 1px solid;
+  display: flex;
+}
+main.home div.content div.tool-bar span.tool {
+  display: inline-block;
+  height: 100%;
+  min-width: 50px;
+}
+main.home div.content div.tool-bar span.tool:hover {
+  background-color: whitesmoke;
+}
+main.home div.content div.tool-bar span.tool:hover a {
+  color: peru;
+}
+main.home div.content div.tool-bar span.tool a {
+  height: 100%;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 0 5px;
+  color: mediumseagreen;
+}
+main.home div.content div.tool-bar span.tool ul {
+  list-style: none;
+}
+main.home div.content div.tool-bar span.tool ul.parent {
+  height: 30px;
+}
+main.home div.content div.tool-bar span.tool ul.parent a {
+  height: 30px;
+}
+main.home div.content div.tool-bar span.tool ul.parent > li {
+  height: 100%;
+  list-style-type: none;
+}
+main.home div.content div.tool-bar span.tool ul.parent > li ul.dropdwn_menu {
+  position: relative;
+  border-right: 2px solid gainsboro;
+  border-bottom: 2px solid gainsboro;
+  display: none;
+  margin-left: -40px;
+  left: 40px;
+  width: 90px;
+}
+main.home div.content div.tool-bar span.tool ul.parent > li ul.dropdwn_menu li {
+  background-color: white;
+  padding: 0 3px;
+  box-shadow: 2px 2px 4px gray;
+  height: 30px;
+  font-size: 20px;
+  color: dimgray;
+}
+main.home div.content div.tool-bar span.tool ul.parent > li ul.dropdwn_menu li:hover {
+  background-color: whitesmoke;
+}
+main.home div.content div.breadcrumbs-area {
+  width: 100%;
+  height: 25px;
+  overflow: hidden;
+  z-index: -1;
+}
+main.home div.content div.breadcrumbs-area ol.breadcrumbs {
+  height: 100%;
+  margin-top: 2px;
+  list-style: none;
+}
+main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item {
+  display: inline;
+  margin-left: 10px;
+  position: relative;
+  font-weight: 600;
+}
+main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item:not(:first-child)::after {
+  content: "/";
+  position: absolute;
+  top: -4px;
+  left: -9px;
+  color: gray;
+  font-weight: 600;
+}
+main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item a {
+  text-decoration: none;
+  color: royalblue;
+}
+main.home div.content div.breadcrumbs-area ol.breadcrumbs li.current a {
+  color: darkgray;
+  pointer-events: none;
+}
+main.home div.content div#files-area {
+  height: calc(100% - 55px);
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  overflow: auto;
+  z-index: -1;
+}
+main.home div.content div#files-area div.dir {
+  z-index: 1;
+  margin: 10px 20px 0 0;
+  width: 150px;
+  height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+main.home div.content div#files-area div.dir:hover {
+  background-color: whitesmoke;
+}
+main.home div.content div#files-area div.dir:hover > label.decorated-box {
+  display: block;
+}
+main.home div.content div#files-area div.dir i {
+  height: 80px;
+  width: 80px;
+  position: relative;
+}
+main.home div.content div#files-area div.dir i.fa-file-alt {
+  font-size: 70px;
+  margin-bottom: 10px;
+}
+main.home div.content div#files-area div.dir i.fa-file-alt:before {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+main.home div.content div#files-area div.dir i.fa-folder {
+  font-size: 80px;
+  color: goldenrod;
+}
+main.home div.content div#files-area div.dir p {
+  margin: 0;
+  padding: 0 5px;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: Roboto;
+  text-align: center;
+  user-select: text;
+}
+main.home div.content div#files-area div.dir input[type=checkbox] {
+  display: none;
+}
+main.home div.content div#files-area div.dir input[type=checkbox]:checked + label.decorated-box {
+  display: block;
+}
+main.home div.content div#files-area div.dir input[type=checkbox]:checked + label.decorated-box:after {
+  width: 5px;
+  transition: width 100ms;
+}
+main.home div.content div#files-area div.dir input[type=checkbox]:checked + label.decorated-box:before {
+  width: 12px;
+  transition: width 100ms 80ms;
+}
+main.home div.content div#files-area div.dir label.decorated-box {
+  display: none;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  border: 2px solid lightgray;
+  border-radius: 50%;
+  top: 10px;
+  right: 10px;
+  background-color: white;
+  transition: background-color 500ms ease-in, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89);
+}
+main.home div.content div#files-area div.dir label.decorated-box:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 6px;
+  width: 0px;
+  height: 2px;
+  background-color: mediumseagreen;
+  transform: rotate(-45deg);
+  transition: width 50ms;
+}
+main.home div.content div#files-area div.dir label.decorated-box:after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 4px;
+  width: 0px;
+  height: 2px;
+  background-color: mediumseagreen;
+  transform: rotate(45deg);
+  transition: width 50ms 50ms;
+}
+main.home div#context-menu {
+  position: absolute;
+  display: none;
+}
+main.home div#context-menu ul {
+  background-color: white;
+  list-style: none;
+  display: inline-block;
+  box-shadow: 0 0 5px gray;
+}
+main.home div#context-menu ul li {
+  padding: 0 10px;
+}
+main.home div#context-menu ul li:hover {
+  background-color: gainsboro;
+}
+
+/*# sourceMappingURL=home.css.map */

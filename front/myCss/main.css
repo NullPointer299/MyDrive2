@@ -1,0 +1,282 @@
+@import "style.css";
+@import "home.css";
+@import "favorites.css";
+@import "search.css";
+@import "trash.css";
+body {
+  overflow: hidden;
+}
+body header {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  background-color: green;
+}
+body header span.active {
+  background-color: darkgreen !important;
+}
+body header span.drawer {
+  height: 40px;
+  width: 40px;
+}
+body header span.drawer:hover {
+  background-color: forestgreen;
+}
+body header span.drawer label#nav-open {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+body header span.drawer label#nav-open span {
+  display: inline-block;
+  margin: 0 10px;
+  width: 20px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+body header span.drawer label#nav-open span::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+body header span.drawer label#nav-open span::after {
+  content: "";
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  background-color: white;
+  border-radius: 3px;
+}
+body header .nav-unshown {
+  display: none;
+}
+body span.logo-container {
+  height: 40px;
+  width: 75px;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  font-weight: 100;
+}
+body span.logo-container h1.logo {
+  height: 20px;
+  width: 100%;
+  color: white;
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-size: 20px;
+}
+body div.setting-container {
+  height: 40px;
+  margin-left: auto;
+  display: flex;
+}
+body div.setting-container span.setting-items {
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  cursor: pointer;
+}
+body div.setting-container span.setting-items:hover {
+  background-color: darkgreen;
+}
+body div.setting-container span.setting-items i.material-icons {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  color: white;
+  font-size: 28px;
+}
+body div.setting-container span.setting-items i.fas {
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  color: white;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 20px;
+}
+body div.setting-container span.setting-items i.fas.fa-cog:before, body div.setting-container span.setting-items i.fas.fa-user:before {
+  position: absolute;
+  top: 5px;
+  left: 6px;
+}
+body div.inner {
+  display: flex;
+  height: calc(100vh - 40px);
+}
+body div.inner aside {
+  /*side-bar*/
+}
+body div.inner aside#side-nav {
+  height: 100%;
+  min-width: 40px;
+  width: 40px;
+  border-right: 1px solid gainsboro;
+  transition: min-width 0.3s ease-out;
+}
+body div.inner aside#side-nav.active {
+  min-width: 120px;
+}
+body div.inner aside#side-nav div#nav-content {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+body div.inner aside#side-nav div#nav-content ul {
+  width: 100%;
+  padding-top: 0px;
+}
+body div.inner aside#side-nav div#nav-content ul li {
+  cursor: pointer;
+  width: 100%;
+  height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid gainsboro;
+  border-left: white 3px solid;
+  position: relative;
+  overflow: hidden;
+}
+body div.inner aside#side-nav div#nav-content ul li:first-child {
+  border-top: 1px solid gainsboro;
+}
+body div.inner aside#side-nav div#nav-content ul li:hover {
+  background-color: gainsboro;
+  border-left: gainsboro 3px solid;
+}
+body div.inner aside#side-nav div#nav-content ul li.current {
+  border-left: 3px solid mediumseagreen;
+  background-color: whitesmoke;
+  pointer-events: none;
+}
+body div.inner aside#side-nav div#nav-content ul li i {
+  position: absolute;
+  top: 6px;
+  left: 4px;
+}
+body div.inner aside#side-nav div#nav-content ul li span {
+  margin: 6px 0 0 30px;
+  display: inline-block;
+  width: 90px;
+}
+body div.inner aside#side-nav div#nav-content ul li a {
+  cursor: pointer;
+}
+body div.inner aside#side-nav div#nav-content ul li span.nav-unshown {
+  display: none;
+}
+body div.inner main {
+  height: -webkit-calc(100vh - 40px);
+  width: 100%;
+}
+body div#cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.4);
+  z-index: 9998;
+}
+body div#cover div#new-directory {
+  width: 300px;
+  height: 150px;
+  background-color: white;
+  box-shadow: 0 0 10px gray;
+  position: relative;
+}
+body div#cover div#new-directory div.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+body div#cover div#new-directory div.close-button:hover {
+  background-color: gainsboro;
+}
+body div#cover div#new-directory div.close-button:before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 3px;
+  transform: rotate(45deg);
+  width: 22px;
+  height: 2px;
+  background-color: mediumseagreen;
+}
+body div#cover div#new-directory div.close-button:after {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 3px;
+  transform: rotate(-45deg);
+  width: 22px;
+  height: 2px;
+  background-color: mediumseagreen;
+}
+body div#cover div#new-directory div.popup-title {
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-weight: 700;
+  color: dimgray;
+  border-bottom: 1px solid gainsboro;
+}
+body div#cover div#new-directory div.form-container {
+  margin-top: 25px;
+  width: 250px;
+  height: 40px;
+  margin-left: 20px;
+}
+body div#cover div#new-directory div.form-container input[type=text] {
+  height: 100%;
+  width: 100%;
+  border: 2px solid rgba(60, 180, 113, 0.7);
+  border-radius: 4px;
+  font-size: 15px;
+  padding-left: 3px;
+  outline: none;
+  font-family: Serif;
+}
+body div#cover div#new-directory div.form-container input[type=text]:focus {
+  background-color: whitesmoke;
+}
+body div#cover div#new-directory input[type=submit] {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  background-color: white;
+  color: black;
+  font-size: 17px;
+  padding: 0 2px;
+}
+
+/*# sourceMappingURL=main.css.map */
