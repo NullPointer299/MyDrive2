@@ -4,16 +4,19 @@ package controller.login;
 import attribute.AttrCookie;
 import attribute.AttrJsp;
 import attribute.AttrServlet;
+import controller.util.ServletUtil;
 import controller.wrapper.SynchronousHttpServlet;
-import model.dto.cookie.CookieFactory;
+import model.cookie.CookieFactory;
 import model.dto.user.User;
 import model.dto.user.UserFactory;
 import model.util.login.Login;
-import controller.util.ServletUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 

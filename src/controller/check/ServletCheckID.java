@@ -1,10 +1,10 @@
 package controller.check;
 
-import model.dto.check.UserID;
-import model.dto.check.UserIDFactory;
+import controller.wrapper.AsynchronousHttpServlet;
+import model.dto.check.UserId;
+import model.dto.check.UserIdFactory;
 import model.dto.response.JsonFactory;
 import model.util.check.Check;
-import controller.wrapper.AsynchronousHttpServlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,13 +18,13 @@ public class ServletCheckID extends AsynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletCheckID!!!");
-        notLoggedInIfLogin(request, response);
         try {
-            final UserID userID =
-                    UserIDFactory.createCheckID(receiveJsonRequest(request));
+            final UserId.Encoded userIdEncoded =
+                    UserIdFactory.deserialize(receiveJsonRequest(request));
+            final UserId userId = userIdEncoded.toParent();
             final String jsonResponse =
-                    JsonFactory.createRequestResult(
-                            Check.isValidID(userID)).toJson();
+                    JsonFactory.createJsonResponse(
+                            Check.isValidID(userId)).toJson();
             sendJsonResponse(response, jsonResponse);
         } catch (SQLException e) {
             e.printStackTrace();

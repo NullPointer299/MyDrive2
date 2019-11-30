@@ -82,7 +82,6 @@
     margin-left: 2.5em;
     padding-left: 0;
 }
-
 .fa-ul > li {
     position: relative;
 }
@@ -116,7 +115,6 @@
 .fab.fa-pull-left {
     margin-right: 0.3em;
 }
-
 .fa.fa-pull-right,
 .fas.fa-pull-right,
 .far.fa-pull-right,
@@ -141,7 +139,6 @@
         transform: rotate(360deg);
     }
 }
-
 .fa-rotate-90 {
     -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
     transform: rotate(90deg);

@@ -5,7 +5,7 @@ import controller.util.ServletUtil;
 
 public class UserFactory {
 
-    private final static Gson GSON = ServletUtil.getGSON();
+    private final static Gson GSON = ServletUtil.GSON;
 
     public static User create(final int id, final String userId, final String firstName, final String lastName,
                               final String nickname, final String emailAddress, final boolean openness) {

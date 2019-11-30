@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 public class FileFactory {
 
-    private static final Gson GSON = ServletUtil.getGSON();
+    private static final Gson GSON = ServletUtil.GSON;
 
     public static MainFile createMainFile(final int id, final String name, final int parentID,
                                           final int size, final boolean isDirectory, final boolean openness,
@@ -22,7 +22,8 @@ public class FileFactory {
         return new SubFile(id, parentID, name, isDirectory);
     }
 
-    public static UploadFile createUploadFile(final String json) {
+    // TODO Encodedにdeserializeするようになおす
+    public static UploadFile deserializeUploadFile(final String json) {
         return GSON.fromJson(json, UploadFile.class);
     }
 }

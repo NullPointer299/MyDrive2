@@ -29,7 +29,7 @@ function ajax_upload(file) {
     form_data.append('file', file);
     $.ajax({
         type: 'POST',
-        url: '/MyDrive2/Upload/',
+        url: '（アップロード処理を行うサーバー側のURL）',
         data: form_data
     }).done(function () {
         console.log('success');

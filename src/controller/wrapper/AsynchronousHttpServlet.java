@@ -1,9 +1,10 @@
 package controller.wrapper;
 
-import attribute.AttrServlet;
+import model.dto.Encodable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,5 +25,9 @@ public class AsynchronousHttpServlet extends AbstractHttpServletWrapper {
         System.out.println("response = " + jsonResponse); //TODO debug code here.
         out.print(jsonResponse);
         out.flush();
+    }
+
+    protected boolean isValidToken(final HttpSession session, final Encodable encoded) {
+        return encoded.getToken().equals(session.getAttribute("TOKEN"));
     }
 }

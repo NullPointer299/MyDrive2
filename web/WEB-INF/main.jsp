@@ -1,8 +1,7 @@
+<%@ page import="attribute.AttrServlet" %>
 <%@ page import="model.dto.tree.TreeManagement" %>
 <%@ page import="model.dto.user.User" %>
-<%@ page import="controller.util.ServletUtil" %>
-<%@ page import="attribute.AttrJsp" %>
-<%@ page import="attribute.AttrServlet" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: nullpo299
   Date: 2019/09/23
@@ -35,9 +34,7 @@
     <script src="https://kit.fontawesome.com/cd42dc4295.js" crossorigin="anonymous"></script>
 
     <!-- jQuery読み込み -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="../js/jquery-3.4.1.min.js"></script>
     <!-- 自分のcss , js の読み込み-->
     <script>
         const origin_tree = JSON.parse("<%=tm.getSubTree().toJson().replaceAll("\"", "\\\\\"")%>");
@@ -50,6 +47,7 @@
     <script src="../myJs/contextMenu.js"></script>
     <script src="../js/funcResizeBox.js"></script>
     <script src="../myJs/toolbar.js"></script>
+    <script src="../myJs/popUpWindow.js"></script>
     <link rel="stylesheet" href="../myCss/main.css">
 </head>
 <body>
@@ -123,8 +121,7 @@
                         <li>
                             <a>new</a>
                             <ul class="dropdwn_menu">
-                                <li>file</li>
-                                <li>directory</li>
+                                <li id="new-directory-button">directory</li>
                             </ul>
                         </li>
                     </ul>
@@ -230,6 +227,12 @@
     </main>
     <main class="trash" hidden>
     </main>
+</div>
+<div id="cover" hidden>
+    <div id="new-directory" hidden>
+        <div class="close-button"></div>
+        <div class=""></div>
+    </div>
 </div>
 </body>
 </html>

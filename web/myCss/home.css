@@ -10,12 +10,12 @@ main.home div#resize {
   user-select: none;
 }
 main.home div#resize p#tree-comment {
-  position: absolute;
-  background-color: white;
-  font-size: 12px;
-  z-index: 9999;
-  box-shadow: 0 0 3px black;
-  padding: 0 4px;
+    position: absolute;
+    background-color: white;
+    font-size: 12px;
+    z-index: 100;
+    box-shadow: 0 0 3px black;
+    padding: 0 4px;
 }
 main.home div#resize ul {
   list-style: none;
@@ -80,20 +80,20 @@ main.home div#resize ul li a:hover {
 }
 main.home div.content {
     z-index: 0;
-  flex: 3;
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 40px);
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px);
 }
 main.home div.content div.tool-bar {
-  height: 30px;
-  width: 100%;
-  border-bottom: lightgray 1px solid;
+    height: 30px;
+    width: 100%;
+    border-bottom: lightgray 1px solid;
     display: flex;
 }
 main.home div.content div.tool-bar span.tool {
     display: inline-block;
-  height: 100%;
+    height: 100%;
     min-width: 50px;
 }
 main.home div.content div.tool-bar span.tool:hover {
@@ -145,9 +145,9 @@ main.home div.content div.tool-bar span.tool ul.parent > li ul.dropdwn_menu li:h
     background-color: whitesmoke;
 }
 main.home div.content div.breadcrumbs-area {
-  width: 100%;
-  height: 25px;
-  overflow: hidden;
+    width: 100%;
+    height: 25px;
+    overflow: hidden;
     z-index: -1;
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs {
@@ -177,11 +177,11 @@ main.home div.content div.breadcrumbs-area ol.breadcrumbs li.current a {
   pointer-events: none;
 }
 main.home div.content div#files-area {
-  height: calc(100% - 55px);
-  display: flex;
-  flex-flow: row wrap;
-  align-content: flex-start;
-  overflow: auto;
+    height: calc(100% - 55px);
+    display: flex;
+    flex-flow: row wrap;
+    align-content: flex-start;
+    overflow: auto;
     z-index: -1;
 }
 main.home div.content div#files-area div.dir {

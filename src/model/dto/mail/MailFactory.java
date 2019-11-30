@@ -5,9 +5,9 @@ import controller.util.ServletUtil;
 
 public class MailFactory {
 
-    private static final Gson GSON = ServletUtil.getGSON();
+    private static final Gson GSON = ServletUtil.GSON;
 
-    public static Mail createMail(final String json) {
-        return GSON.fromJson(json, Mail.class);
+    public static Mail.Encoded deserialize(final String json) {
+        return GSON.fromJson(json, Mail.Encoded.class);
     }
 }

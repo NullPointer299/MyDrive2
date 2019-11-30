@@ -1,11 +1,9 @@
 package model.dto.mail;
 
+import model.dto.Convertible;
 import model.dto.Encodable;
-import model.dto.Jsonable;
 
-import java.io.UnsupportedEncodingException;
-
-public class Mail implements Jsonable<Mail.Encoded> {
+public class Mail {
 
     private final String emailAddress;
     private final String lastName;
@@ -13,7 +11,7 @@ public class Mail implements Jsonable<Mail.Encoded> {
 
     private final Encoded encoded;
 
-    Mail(String emailAddress, String lastName, String firstName) throws UnsupportedEncodingException {
+    Mail(final String emailAddress, final String lastName, final String firstName) {
         this.emailAddress = emailAddress;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -32,21 +30,21 @@ public class Mail implements Jsonable<Mail.Encoded> {
         return firstName;
     }
 
-    @Override
-    public String toJson() {
-        return toJson(encoded);
-    }
-
-    public class Encoded implements Encodable {
+    public class Encoded extends Encodable implements Convertible<Mail> {
 
         private final String emailAddress;
         private final String lastName;
         private final String firstName;
 
-        Encoded(String emailAddress, String lastName, String firstName) throws UnsupportedEncodingException {
+        Encoded(final String emailAddress, final String lastName, final String firstName) {
             this.emailAddress = encode(emailAddress);
             this.lastName = encode(lastName);
             this.firstName = encode(firstName);
+        }
+
+        @Override
+        public Mail toParent() {
+            return new Mail(emailAddress, lastName, firstName);
         }
     }
 }

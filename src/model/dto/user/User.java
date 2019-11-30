@@ -61,7 +61,7 @@ public class User implements Jsonable<User.Encoded> {
         return toJson(encoded);
     }
 
-    public class Encoded implements Encodable {
+    public class Encoded extends Encodable {
 
         private final String userId;
         private final String firstName;

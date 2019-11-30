@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class CodeFactory {
 
-    private static final Gson GSON = ServletUtil.getGSON();
+    private static final Gson GSON = ServletUtil.GSON;
 
     private static final Random random = new SecureRandom();
 
@@ -17,8 +17,8 @@ public class CodeFactory {
         return new Code(generateAuthCode());
     }
 
-    public static Code create(final String json) {
-        return GSON.fromJson(json, Code.class);
+    public static Code.Encoded deserialize(final String json) {
+        return GSON.fromJson(json, Code.Encoded.class);
     }
 
     private static String generateAuthCode() {

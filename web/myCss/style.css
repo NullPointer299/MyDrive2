@@ -9,9 +9,9 @@
   src: url("../font/ANGELTEARS-trial.ttf");
 }
 * {
-  margin: 0;
-  padding: 0;
-  font-family: "Alegreya Sans SC", sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: "Alegreya Sans SC", sans-serif;
     user-select: none;
 }
 
@@ -22,8 +22,8 @@ body {
 }
 body header h1.logo {
     font-family: "Angel";
-  font-size: 80px;
-  width: 100vw;
+    font-size: 80px;
+    width: 100vw;
 }
 
 /*# sourceMappingURL=style.css.map */

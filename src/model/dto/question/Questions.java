@@ -11,7 +11,7 @@ public class Questions implements Jsonable<Questions.Encoded> {
 
     private final Encoded encoded;
 
-    Questions(String[] questions) {
+    Questions(final String[] questions) {
         this.questions = questions;
         this.encoded = new Encoded(questions);
     }
@@ -25,11 +25,12 @@ public class Questions implements Jsonable<Questions.Encoded> {
         return toJson(encoded);
     }
 
-    class Encoded implements Encodable {
+    // 送信専用のため、Convertibleは実装しない
+    class Encoded extends Encodable {
 
         private final String[] questions;
 
-        Encoded(String[] questions) {
+        Encoded(final String[] questions) {
             this.questions =
                     Arrays.stream(questions).map(this::encode).toArray(String[]::new);
         }
