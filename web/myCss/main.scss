@@ -219,4 +219,62 @@ body {
       width: 100%;
     }
   }
+
+  div#cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(200, 200, 200, .4);
+    z-index: 9998;
+
+    div#new-directory {
+      width: 50%;
+      height: 200px;
+      background-color: white;
+      box-shadow: 0 0 5px gray;
+      position: relative;
+
+      div.close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        border: 1px solid white;
+        border-radius: 50%;
+
+        &:hover {
+          background-color: gainsboro;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 13px;
+          left: 3px;
+          transform: rotate(45deg);
+          width: 22px;
+          height: 2px;
+          background-color: mediumseagreen;
+        }
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 13px;
+          left: 3px;
+          transform: rotate(-45deg);
+          width: 22px;
+          height: 2px;
+          background-color: mediumseagreen;
+        }
+      }
+    }
+  }
+
 }

@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql:8
 
 RUN mkdir -p /var/log/mysql/
 RUN touch /var/log/mysql/mysqld.log

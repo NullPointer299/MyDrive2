@@ -1,23 +1,36 @@
+/*
+継承したクラスのフィールドをエンコードするための抽象クラスです。
+
+ */
+
+
 package model.dto;
 
-
-import model.util.servlet.ServletUtil;
+import model.dto.token.Token;
+import model.dto.token.TokenFactory;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public interface Encodable {
+@SuppressWarnings("SpellCheckingInspection")
+public abstract class Encodable {
 
-    String UTF_8 = ServletUtil.getUTF_8();
+    private String token = null;
 
-    default String encode(Object target) {
+    protected String encode(Object target) {
         try {
-            return URLEncoder.encode(String.valueOf(target), UTF_8);
+            return URLEncoder.encode(String.valueOf(target), "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            System.exit(1);
         }
-        // 取得失敗
         return null;
+    }
+
+    public void setToken(final Token token) {
+        this.token = token.getTokenString();
+    }
+
+    public Token getToken() {
+        return TokenFactory.createToken(token);
     }
 }

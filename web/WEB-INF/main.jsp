@@ -1,6 +1,7 @@
+<%@ page import="attribute.AttrServlet" %>
 <%@ page import="model.dto.tree.TreeManagement" %>
 <%@ page import="model.dto.user.User" %>
-<%@ page import="model.util.servlet.ServletUtil" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: nullpo299
   Date: 2019/09/23
@@ -9,7 +10,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
-    final String SERVLET_LOGOUT = ServletUtil.getSERVLET_LOGOUT(true);
     final User user = (User) session.getAttribute("USER");
     final TreeManagement tm = ((TreeManagement) session.getAttribute("TREE_MANAGEMENT"));
     System.out.println(tm.getSubTree().toJson().replaceAll("\"", "\\\\\"")); //TODO debug code here.
@@ -34,12 +34,10 @@
     <script src="https://kit.fontawesome.com/cd42dc4295.js" crossorigin="anonymous"></script>
 
     <!-- jQuery読み込み -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="../js/jquery-3.4.1.min.js"></script>
     <!-- 自分のcss , js の読み込み-->
     <script>
-        const origin_tree = JSON.parse("{\"1\":[{\"id\":\"2\",\"parentId\":\"1\",\"name\":\"nullpo299\",\"isDirectory\":\"true\"}],\"2\":[{\"id\":\"3\",\"parentId\":\"2\",\"name\":\"super\",\"isDirectory\":\"true\"},{\"id\":\"6\",\"parentId\":\"2\",\"name\":\"outfile\",\"isDirectory\":\"false\"}],\"3\":[{\"id\":\"4\",\"parentId\":\"3\",\"name\":\"multi\",\"isDirectory\":\"true\"}],\"4\":[{\"id\":\"5\",\"parentId\":\"4\",\"name\":\"otinpo\",\"isDirectory\":\"true\"}]}");
+        const origin_tree = JSON.parse("<%=tm.getSubTree().toJson().replaceAll("\"", "\\\\\"")%>");
         const rootId = decodeURI(origin_tree["1"]["0"].id);
     </script>
     <script src="../myJs/upload.js"></script>
@@ -49,6 +47,7 @@
     <script src="../myJs/contextMenu.js"></script>
     <script src="../js/funcResizeBox.js"></script>
     <script src="../myJs/toolbar.js"></script>
+    <script src="../myJs/popUpWindow.js"></script>
     <link rel="stylesheet" href="../myCss/main.css">
 </head>
 <body>
@@ -72,7 +71,7 @@
             </a>
         </span>
         <span class="setting-items" id="logout">
-            <a href="<%=SERVLET_LOGOUT%>">
+            <a href="<%=AttrServlet.LOGOUT.getUrl(true)%>">
                 <i class="material-icons">exit_to_app</i>
             </a>
         </span>
@@ -122,8 +121,7 @@
                         <li>
                             <a>new</a>
                             <ul class="dropdwn_menu">
-                                <li>file</li>
-                                <li>directory</li>
+                                <li id="new-directory-button">directory</li>
                             </ul>
                         </li>
                     </ul>
@@ -229,6 +227,12 @@
     </main>
     <main class="trash" hidden>
     </main>
+</div>
+<div id="cover" hidden>
+    <div id="new-directory" hidden>
+        <div class="close-button"></div>
+        <div class=""></div>
+    </div>
 </div>
 </body>
 </html>

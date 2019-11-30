@@ -5,21 +5,20 @@
 
 package controller.logout;
 
-import model.util.servlet.ServletUtil;
+import attribute.AttrCookie;
+import attribute.AttrServlet;
+import controller.wrapper.SynchronousHttpServlet;
+import model.cookie.CookieFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "ServletLogout", urlPatterns = "/Logout/")
-public class ServletLogout extends HttpServlet {
-
-    // リダイレクトのするため、JSPとして呼び出す
-    private final String SERVLET_LOGIN = ServletUtil.getSERVLET_LOGIN(true);
-
-    private final String COOKIE_LOGIN = ServletUtil.getCOOKIE_LOGIN();
-    private final String COOKIE_PATH = ServletUtil.getCOOKIE_PATH();
+public class ServletLogout extends SynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletLogout!!!");
@@ -33,16 +32,12 @@ public class ServletLogout extends HttpServlet {
 
     private void logout(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         String url;
-        url = SERVLET_LOGIN;
+        // リダイレクトのためtrue
+        url = AttrServlet.LOGIN.getUrl(true);
         final HttpSession session = request.getSession(false);
         if (session != null)
             session.invalidate();
-        final Cookie login = ServletUtil.findCookieOrNull(request.getCookies(), COOKIE_LOGIN);
-        if (login != null) {
-            login.setMaxAge(0); //Cookieの削除
-            login.setPath(COOKIE_PATH);
-            response.addCookie(login);
-        }
+        CookieFactory.removeCookie(request, response, AttrCookie.LOGIN);
         response.sendRedirect(url);
     }
 }

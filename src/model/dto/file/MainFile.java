@@ -14,8 +14,8 @@ public class MainFile {
     private final int thumbnailPath;
     private final String ownerUserName;
 
-    public MainFile(final int id, final String name, final int parentId, final int size, final boolean isDirectory, boolean openness,
-                    final LocalDateTime createAt, final LocalDateTime modifiedAt, final int thumbnailPath, final String ownerUserName) {
+    MainFile(final int id, final String name, final int parentId, final int size, final boolean isDirectory, boolean openness,
+             final LocalDateTime createAt, final LocalDateTime modifiedAt, final int thumbnailPath, final String ownerUserName) {
         this.id = id;
         this.name = name;
         this.parentId = parentId;

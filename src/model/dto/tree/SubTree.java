@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.Collectors;
 
 public class SubTree implements Jsonable<SubTree.Encoded> {
 
@@ -53,11 +53,13 @@ public class SubTree implements Jsonable<SubTree.Encoded> {
         return FileFactory.createSubFile(id, parentID, name, isDirectory);
     }
 
-    class Encoded implements Encodable {
+    // 送信専用のため、Convertibleは実装しない
+    class Encoded extends Encodable {
 
         private final Map<Integer, List<SubFile.Encoded>> subTree;
 
         Encoded(final SubTree subTree) {
+
             final Map<Integer, List<SubFile.Encoded>> tree = new HashMap<>();
             subTree.subTree.forEach((key, files) ->
                     tree.put(key, files.stream().map(SubFile::getEncoded).collect(Collectors.toList())));

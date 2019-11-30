@@ -1,4 +1,5 @@
-<%@ page import="model.util.servlet.ServletUtil" %><%--
+<%@ page import="attribute.AttrServlet" %>
+<%--
   Created by IntelliJ IDEA.
   User: nullpo299
   Date: 2019/09/22
@@ -6,10 +7,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%
-    final String SERVLET_REGISTER = ServletUtil.getSERVLET_REGISTER(true);
-    final String SERVLET_LOGIN = ServletUtil.getSERVLET_LOGIN(true);
-%>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -59,7 +56,7 @@
         </div>
     </div>
 </div>
-<p>If you don't have an account , click <a href="<%=SERVLET_REGISTER%>">here</a></p>
+<p>If you don't have an account , click <a href="<%=AttrServlet.REGISTER.getUrl(true)%>">here</a></p>
 <p>If you forget your ID or Password , click <a href="#">here</a></p>
 <footer><small>&copy;H&amp;H 2019</small></footer>
 </body>

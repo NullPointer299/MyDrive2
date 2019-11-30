@@ -4,31 +4,35 @@ services:
 
   nginx:
     build: ./servers/nginx/
-    image: mydrive2-nginx-image
+    image: mydrive2-nginx-image:1.17
     #restart: always
     container_name: mydrive2-nginx
     depends_on:
       - tomcat
     networks:
       - app-net
+    #environment:
+    #  LANG: en_US.UTF-8
     ports:
       - "80:8080"
 
   tomcat:
     build: ./servers/tomcat/
-    image: mydrive2-tomcat-image
+    image: mydrive2-tomcat-image:8
     #restart: always
     container_name: mydrive2-tomcat
     depends_on:
       - mysql
     networks:
       - app-net
+    #environment:
+    #  LANG: en_US.UTF-8
     volumes:
       - ./out/MyDrive2:/usr/local/tomcat/webapps
 
   mysql:
     build: ./servers/mysql/
-    image: mydrive2-mysql-image
+    image: mydrive2-mysql-image:8
     #restart: always
     container_name: mydrive2-mysql
     networks:
@@ -36,6 +40,7 @@ services:
     environment:
       MYSQL_DATABASE: MyDrive2
       MYSQL_ROOT_PASSWORD: password
+      LANG: en_US.UTF-8
     volumes:
       - ./servers/mysql/data:/var/lib/mysql
 

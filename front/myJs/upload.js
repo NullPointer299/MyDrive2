@@ -14,9 +14,6 @@ $(function () {
     $(document).on('drop', '#files-area', function (event) {
         event.preventDefault();
         event.stopPropagation();
-        if (event.originalEvent) {
-            event = event.originalEvent;
-        }
         let files = event.dataTransfer.files;
         for (let file of files) {
             ajax_upload(file);
@@ -30,7 +27,10 @@ function ajax_upload(file) {
     $.ajax({
         type: 'POST',
         url: '（アップロード処理を行うサーバー側のURL）',
-        data: form_data
+        data: {
+            "file":form_data,
+            "name":"aaa"
+        }
     }).done(function () {
         console.log('success');
     }).fail(function () {

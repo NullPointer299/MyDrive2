@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.dto.check.UserID;
+import model.dto.check.UserId;
 import model.dto.mail.Mail;
 import model.dto.user.User;
 import model.dto.user.UserFactory;
@@ -16,7 +16,7 @@ public class DAOUsers {
 
     private final static DAOMyDrive2 DAO_MYDRIVE2 = DAOMyDrive2.DAO_MYDRIVE2;
 
-    public static boolean isExistUserID(final UserID userID) throws SQLException {
+    public static boolean isExistUserID(final UserId userID) throws SQLException {
         final String sql = String.format(
                 "SELECT id" +
                         " FROM users" +

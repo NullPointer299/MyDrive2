@@ -1,18 +1,19 @@
 package model.dto.code;
 
+import model.dto.Convertible;
 import model.dto.Encodable;
-import model.dto.Jsonable;
 
+import java.util.Objects;
 
-public class Code implements Jsonable<Code.Encoded> {
+public class Code {
 
     private final String code;
 
     private final Encoded encoded;
 
-    Code(String code) {
+    Code(final String code) {
         this.code = code;
-        this.encoded = new Encoded(code);
+        this.encoded = new Encoded(this);
     }
 
     public String getCode() {
@@ -20,15 +21,16 @@ public class Code implements Jsonable<Code.Encoded> {
     }
 
     @Override
-    public String toJson() {
-        return toJson(encoded);
+    public boolean equals(final Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Code code = (Code) obj;
+        return Objects.equals(this.code, code.code);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (!o.getClass().equals(Code.class))
-            return false;
-        return ((Code) o).getCode().equals(code);
+    public int hashCode() {
+        return Objects.hash(code, encoded);
     }
 
     @Override
@@ -40,12 +42,17 @@ public class Code implements Jsonable<Code.Encoded> {
                 .toString();
     }
 
-    public class Encoded implements Encodable {
+    public class Encoded extends Encodable implements Convertible<Code> {
 
         private final String code;
 
-        Encoded(final String code) {
-            this.code = encode(code);
+        Encoded(final Code code) {
+            this.code = encode(code.getCode());
+        }
+
+        @Override
+        public Code toParent() {
+            return new Code(code);
         }
     }
 }
