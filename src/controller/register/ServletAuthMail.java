@@ -37,25 +37,35 @@ public class ServletAuthMail extends AsynchronousHttpServlet {
                 if (Check.isValidMail(mail)) {
                     System.out.println("Valid mail!");  // TODO debug code here.
                     final Token token=TokenFactory.createToken();
-                    jsonResponse = JsonFactory.createJsonResponse(true);
-                    jsonResponse.getEncoded().setToken(token);
                     final String title = "認証コードのお知らせ";
                     final Code code = CodeFactory.create();
+                    System.out.println("generate code!!! : " + code); // TODO debug code here.
                     final String text = mail.getLastName() + " " + mail.getFirstName() + "さん\n\n" +
-                            "あなたの認証コードは\n\n" +
-                            code + "\n\n" +
-                            "です";
+                            "あなたの認証コードは\n" +
+                            code + "\n" +
+                            "です\n\n" +
+                            "*** 注意 ***\n" +
+                            "同一のブラウザからアクセスのみ有効です\n" +
+                            "************\n\n" +
+                            "このメールに心当たりがない場合は削除してください。";
                     final String toAddress = mail.getEmailAddress();
-                    MailSender.send(title, text, toAddress);
-                    session.setAttribute("CODE", code);
-                    session.setAttribute("TOKEN", token);
+                    if (MailSender.send(title, text, toAddress)) {
+                        session.setAttribute("CODE", code);
+                        session.setAttribute("TOKEN", token);
+                        jsonResponse = JsonFactory.createJsonResponse(true);
+                        jsonResponse.getEncoded().setToken(token);
+                    } else {
+                        System.out.println("Failed send mail!"); // TODO debug code here.
+                        jsonResponse = JsonFactory.createJsonResponse(false, "Failed to send Email!");
+                    }
                 } else {
                     System.out.println("Invalid mail!"); // TODO debug code here.
-                    jsonResponse = JsonFactory.createJsonResponse(false);
+                    jsonResponse = JsonFactory.createJsonResponse(false, "Already registered address!");
                 }
                 sendJsonResponse(response, jsonResponse.toJson());
             } else {
                 // tokenが無効だったとき
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
