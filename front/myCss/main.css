@@ -277,6 +277,7 @@ body div#cover div#new-directory input[type=submit] {
   color: black;
   font-size: 17px;
   padding: 0 2px;
+  outline: none;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -186,6 +186,7 @@ $(function () {
                     .append($('<input/>', {type: 'hidden', name: 'question', value: select}))
                     .append($('<input/>', {type: 'hidden', name: 'answer', value: answer}))
                     .append($('<input/>', {type: 'hidden', name: 'openness', value: openness}))
+                    .append($('<input/>', {type: 'hidden', name: 'token',value: token}))
                     .appendTo(document.body)
                     .submit();
         }
