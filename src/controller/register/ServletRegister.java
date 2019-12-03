@@ -41,8 +41,8 @@ public class ServletRegister extends SynchronousHttpServlet {
 
             // TODO 値チェックする parseできない値とか
             if (ServletUtil.nullCheck(emailAddress, lastName, firstName,
-                    userId, password, question, answer, openness) &&
-                    session.getAttribute("TOKEN").equals(TokenFactory.createToken(token))) {
+                    userId, password, question, answer, openness, token) &&
+                    TokenFactory.createToken(token).equals(session.getAttribute("TOKEN"))) {
                 System.out.println("RegisterUser!!!"); // TODO debug code here
                 DAOUsers.registerUser(userId, firstName, lastName,
                         emailAddress, Boolean.parseBoolean(openness),
@@ -50,8 +50,8 @@ public class ServletRegister extends SynchronousHttpServlet {
                 DAOFiles.createFileEntry(userId, 1, 0, true, true, 1);
                 request.getSession().invalidate();
                 CookieFactory.removeCookie(request, response, AttrCookie.LOGIN);
-                response.sendRedirect(AttrServlet.LOGIN.getUrl(true));
-            }else{
+                sendRedirect(response, AttrServlet.LOGIN);
+            } else {
                 // 無効なtokenか不正な引数
                 System.out.println("Invalid Token or Illegal arguments!");
             }
@@ -64,6 +64,6 @@ public class ServletRegister extends SynchronousHttpServlet {
         System.out.println("[GET]ServletRegister!!!");
         final HttpSession session=request.getSession(true);
         session.setAttribute("TOKEN", TokenFactory.createToken());
-        request.getRequestDispatcher(AttrJsp.REGISTER.getUrl()).forward(request, response);
+        forward(request, response, AttrJsp.REGISTER);
     }
 }

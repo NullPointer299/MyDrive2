@@ -28,8 +28,12 @@ abstract class AbstractHttpServletWrapper extends HttpServlet {
         if (isLoggedIn(request))
             setCharacterEncodingUtf8(request);
         else
-            // リダイレクトだからtrue
-            response.sendRedirect(AttrServlet.LOGIN.getUrl(true));
+            sendRedirect(response, AttrServlet.LOGIN);
+    }
+
+    protected void sendRedirect(final HttpServletResponse response, final AttrServlet servlet) throws IOException {
+        System.out.println("Redirect to " + servlet.name());
+        response.sendRedirect(servlet.getUrl(true));
     }
 
     protected String URLEncode(final String target) throws UnsupportedEncodingException {

@@ -22,22 +22,21 @@ public class ServletLogout extends SynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletLogout!!!");
+        setCharacterEncodingUtf8(request);
         logout(request, response);
     }
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletLogout!!!");
+        setCharacterEncodingUtf8(request);
         logout(request, response);
     }
 
     private void logout(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
-        String url;
-        // リダイレクトのためtrue
-        url = AttrServlet.LOGIN.getUrl(true);
         final HttpSession session = request.getSession(false);
         if (session != null)
             session.invalidate();
         CookieFactory.removeCookie(request, response, AttrCookie.LOGIN);
-        response.sendRedirect(url);
+        sendRedirect(response, AttrServlet.LOGIN);
     }
 }

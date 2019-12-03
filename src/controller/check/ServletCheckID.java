@@ -1,5 +1,6 @@
 package controller.check;
 
+import attribute.AttrServlet;
 import controller.wrapper.AsynchronousHttpServlet;
 import model.dto.check.UserId;
 import model.dto.check.UserIdFactory;
@@ -18,6 +19,7 @@ public class ServletCheckID extends AsynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletCheckID!!!");
+        setCharacterEncodingUtf8(request);
         try {
             final UserId.Encoded userIdEncoded =
                     UserIdFactory.deserialize(receiveJsonRequest(request));
@@ -26,13 +28,15 @@ public class ServletCheckID extends AsynchronousHttpServlet {
                     JsonFactory.createJsonResponse(
                             Check.isValidID(userId)).toJson();
             sendJsonResponse(response, jsonResponse);
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
+            // 503?
             e.printStackTrace();
         }
     }
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletCheckID!!!");
-        notLoggedInIfLogin(request, response);
+        setCharacterEncodingUtf8(request);
+        sendRedirect(response, AttrServlet.LOGIN);
     }
 }

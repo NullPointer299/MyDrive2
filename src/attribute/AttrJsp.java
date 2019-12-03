@@ -2,8 +2,6 @@ package attribute;
 
 public enum AttrJsp {
 
-    // enumの命名を考える cookieとかように対応できるようにする
-
     LOGIN("login.jsp"),
     REGISTER("register.jsp"),
     MAIN("main.jsp");

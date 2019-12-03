@@ -1,5 +1,6 @@
 package controller.register;
 
+import attribute.AttrServlet;
 import controller.wrapper.AsynchronousHttpServlet;
 import model.dto.code.Code;
 import model.dto.code.CodeFactory;
@@ -20,6 +21,7 @@ public class ServletAuthCode extends AsynchronousHttpServlet {
 
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletAuthCode!!!");
+        setCharacterEncodingUtf8(request);
         final HttpSession session = request.getSession(true);
         final String jsonRequest = receiveJsonRequest(request);
         final Code.Encoded codeEncoded = CodeFactory.deserialize(jsonRequest);
@@ -33,12 +35,13 @@ public class ServletAuthCode extends AsynchronousHttpServlet {
             session.setAttribute("TOKEN", token);
             sendJsonResponse(response, jsonResponse.toJson());
         } else {
-            // トークンが不正なときの処理
+            sendRedirect(response, AttrServlet.LOGIN);
         }
     }
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletAuthCode!!!");
-        notLoggedInIfLogin(request, response);
+        setCharacterEncodingUtf8(request);
+        sendRedirect(response, AttrServlet.LOGIN);
     }
 }

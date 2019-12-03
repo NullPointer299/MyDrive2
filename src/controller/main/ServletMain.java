@@ -20,7 +20,6 @@ public class ServletMain extends SynchronousHttpServlet {
     protected void doPost(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[POST]ServletMain!!!");
         notLoggedInIfLogin(request, response);
-        String url;
         final HttpSession session = request.getSession();
         final User user = (User) session.getAttribute("USER");
         try {
@@ -28,17 +27,17 @@ public class ServletMain extends SynchronousHttpServlet {
                 final TreeManagement tm = TreeFactory.createTreeManagement(user.getId());
                 session.setAttribute("TREE_MANAGEMENT", tm);
             }
-            url = AttrJsp.MAIN.getUrl();
-        } catch (SQLException e) {
-            url = "503page";
+        } catch (final SQLException e) {
+            // 503?
             e.printStackTrace();
         }
-        request.getRequestDispatcher(url).forward(request, response);
+        forward(request, response, AttrJsp.MAIN);
     }
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletMain!!!");
         System.out.println("Redirect to POST");
+        setCharacterEncodingUtf8(request);
         doPost(request, response);
     }
 }

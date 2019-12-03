@@ -1,5 +1,6 @@
 package controller.register;
 
+import attribute.AttrServlet;
 import controller.wrapper.AsynchronousHttpServlet;
 import model.dto.code.Code;
 import model.dto.code.CodeFactory;
@@ -64,8 +65,7 @@ public class ServletAuthMail extends AsynchronousHttpServlet {
                 }
                 sendJsonResponse(response, jsonResponse.toJson());
             } else {
-                // tokenが無効だったとき
-
+                sendRedirect(response, AttrServlet.LOGIN);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -75,6 +75,7 @@ public class ServletAuthMail extends AsynchronousHttpServlet {
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletAuthMail!!!");
-        notLoggedInIfLogin(request, response);
+        setCharacterEncodingUtf8(request);
+        sendRedirect(response, AttrServlet.LOGIN);
     }
 }

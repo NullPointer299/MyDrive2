@@ -3,6 +3,7 @@ Tokenを受け取って秘密の質問を返します
  */
 package controller.register;
 
+import attribute.AttrServlet;
 import controller.wrapper.AsynchronousHttpServlet;
 import model.dto.question.Questions;
 import model.dto.question.QuestionsFactory;
@@ -27,16 +28,16 @@ public class ServletGetQuestions extends AsynchronousHttpServlet {
             final String jsonRequest = receiveJsonRequest(request);
             final Token.Encoded tokenEncoded = TokenFactory.deserialize(jsonRequest);
             if (isValidToken(session, tokenEncoded)) {
-                final Token token=TokenFactory.createToken();
-                final Questions questions=QuestionsFactory.create();
+                final Token token = TokenFactory.createToken();
+                final Questions questions = QuestionsFactory.create();
                 questions.getEncoded().setToken(token);
                 final String jsonResponse = questions.toJson();
                 session.setAttribute("TOKEN", token);
                 sendJsonResponse(response, jsonResponse);
             } else {
-                // TODO Tokenが不正だったとき
+                sendRedirect(response, AttrServlet.LOGIN);
             }
-        } catch (SQLException e) {
+        } catch (final SQLException e) {
             // 503ページ？
             e.printStackTrace();
         }
@@ -44,6 +45,7 @@ public class ServletGetQuestions extends AsynchronousHttpServlet {
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletGetQuestions!!!");
-        notLoggedInIfLogin(request, response);
+        setCharacterEncodingUtf8(request);
+        sendRedirect(response, AttrServlet.LOGIN);
     }
 }

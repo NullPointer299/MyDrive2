@@ -28,30 +28,26 @@ public class ServletLogin extends SynchronousHttpServlet {
         setCharacterEncodingUtf8(request);
         final String userId = request.getParameter("user-id");
         final String password = request.getParameter("password");
-        String url;
         if (ServletUtil.nullCheck(userId, password)) {
             try {
                 final Login login = new Login(userId, password);
                 System.out.println("login: " + login.isSuccess());    // TODO debug code here.
                 if (login.isSuccess()) {
                     final User user = login.getUser();
-                    final Cookie cookie = CookieFactory.create(AttrCookie.LOGIN, user.toJson());
+                    final Cookie cookie = CookieFactory.create(AttrCookie.LOGIN, URLEncode(user.toJson()));
                     final HttpSession session = request.getSession();
                     session.setAttribute("USER", user);
                     response.addCookie(cookie);
-                    // リダイレクトだからtrue
-                    url = AttrServlet.MAIN.getUrl(true);
-                    response.sendRedirect(url);
+                    sendRedirect(response, AttrServlet.MAIN);
                 } else {
-                    request.getRequestDispatcher(AttrJsp.LOGIN.getUrl()).forward(request, response);
+                    forward(request, response, AttrJsp.LOGIN);
                 }
             } catch (SQLException e) {
                 //  TODO 503ページに遷移？
                 e.printStackTrace();
-                url = "503page";
             }
         } else {
-            request.getRequestDispatcher(AttrJsp.LOGIN.getUrl()).forward(request, response);
+            forward(request, response, AttrJsp.LOGIN);
         }
     }
 
@@ -62,10 +58,9 @@ public class ServletLogin extends SynchronousHttpServlet {
         final Cookie cookie = CookieFactory.findCookieOrNull(cookies, AttrCookie.LOGIN);
         if (cookie != null) {
             request.getSession().setAttribute("USER",
-                    UserFactory.create(URLEncode(cookie.getValue())));
-            // リダイレクトだからtrue
-            response.sendRedirect(AttrServlet.MAIN.getUrl(true));
+                    UserFactory.create(URLDecode(cookie.getValue())));
+            sendRedirect(response, AttrServlet.MAIN);
         }
-        request.getRequestDispatcher(AttrJsp.LOGIN.getUrl()).forward(request, response);
+        forward(request, response, AttrJsp.LOGIN);
     }
 }
