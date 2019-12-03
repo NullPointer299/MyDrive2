@@ -8,5 +8,6 @@ $(function(){
         event.stopPropagation();
         $('#cover').attr('hidden',true);
         $('#new-directory').attr('hidden',true);
+        $('#new-directory input[type=text]').val("");
     });
 });
