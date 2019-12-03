@@ -46,7 +46,7 @@ public class ServletAuthMail extends AsynchronousHttpServlet {
                             code + "\n" +
                             "です\n\n" +
                             "*** 注意 ***\n" +
-                            "同一のブラウザからアクセスのみ有効です\n" +
+                            "同一のブラウザからのアクセスのみ有効です\n" +
                             "************\n\n" +
                             "このメールに心当たりがない場合は削除してください。";
                     final String toAddress = mail.getEmailAddress();

@@ -270,13 +270,14 @@ body div#cover div#new-directory div.form-container input[type=text]:focus {
   background-color: whitesmoke;
 }
 body div#cover div#new-directory input[type=submit] {
-  position: absolute;
-  bottom: 5px;
-  right: 10px;
-  background-color: white;
-  color: black;
-  font-size: 17px;
-  padding: 0 2px;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    background-color: white;
+    color: black;
+    font-size: 17px;
+    padding: 0 2px;
+    outline: none;
 }
 
 /*# sourceMappingURL=main.css.map */
