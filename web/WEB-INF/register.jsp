@@ -1,5 +1,5 @@
-<%@ page import="controller.util.ServletUtil" %>
-<%@ page import="attribute.AttrServlet" %><%--
+<%@ page import="attribute.AttrServlet" %>
+<%@ page import="model.dto.token.Token" %><%--
   Created by IntelliJ IDEA.
   User: nullpo299
   Date: 2019/09/24
@@ -27,6 +27,7 @@
     <!--自前のファイル読み込み-->
     <link href="../myCss/register.css" rel="stylesheet">
     <script src="../myJs/register.js"></script>
+    <script>let token = "<%=((Token)session.getAttribute("TOKEN")).getTokenString()%>";</script>
 </head>
 
 <!--

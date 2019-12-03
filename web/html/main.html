@@ -105,7 +105,7 @@
                         <li>
                             <a>new</a>
                             <ul class="dropdwn_menu">
-                                <li id="new-directory-button">directory</li>
+                                <li id="new-directory-button" class="not-close-action">directory</li>
                             </ul>
                         </li>
                     </ul>
@@ -213,9 +213,13 @@
     </main>
 </div>
 <div id="cover" hidden>
-    <div id="new-directory" hidden>
+    <div id="new-directory" class="not-close-action" hidden>
         <div class="close-button"></div>
-        <div class=""></div>
+        <div class="popup-title not-close-action">New Directory</div>
+        <div class="form-container">
+            <input class="popup-text not-close-action" type="text" placeholder="Directory Name">
+        </div>
+        <input type="submit" value="create">
     </div>
 </div>
 </body>

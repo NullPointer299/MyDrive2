@@ -21,7 +21,7 @@ public class CodeFactory {
         return GSON.fromJson(json, Code.Encoded.class);
     }
 
-    private static String generateAuthCode() {
+    public static String generateAuthCode() {
         final StringBuilder authCode = new StringBuilder();
         IntStream.generate(
                 () -> random.nextInt(10))

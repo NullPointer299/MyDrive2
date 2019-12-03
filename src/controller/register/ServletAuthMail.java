@@ -7,6 +7,7 @@ import model.dto.mail.Mail;
 import model.dto.mail.MailFactory;
 import model.dto.response.JsonFactory;
 import model.dto.response.JsonResponse;
+import model.dto.token.Token;
 import model.dto.token.TokenFactory;
 import model.util.check.Check;
 import model.util.mail.MailSender;
@@ -35,8 +36,9 @@ public class ServletAuthMail extends AsynchronousHttpServlet {
                 JsonResponse jsonResponse;
                 if (Check.isValidMail(mail)) {
                     System.out.println("Valid mail!");  // TODO debug code here.
+                    final Token token=TokenFactory.createToken();
                     jsonResponse = JsonFactory.createJsonResponse(true);
-                    jsonResponse.getEncoded().setToken(TokenFactory.createToken());
+                    jsonResponse.getEncoded().setToken(token);
                     final String title = "認証コードのお知らせ";
                     final Code code = CodeFactory.create();
                     final String text = mail.getLastName() + " " + mail.getFirstName() + "さん\n\n" +
@@ -46,6 +48,7 @@ public class ServletAuthMail extends AsynchronousHttpServlet {
                     final String toAddress = mail.getEmailAddress();
                     MailSender.send(title, text, toAddress);
                     session.setAttribute("CODE", code);
+                    session.setAttribute("TOKEN", token);
                 } else {
                     System.out.println("Invalid mail!"); // TODO debug code here.
                     jsonResponse = JsonFactory.createJsonResponse(false);

@@ -69,6 +69,7 @@ body span.logo-container {
   display: flex;
   align-items: center;
   margin: 0 10px;
+  font-weight: 100;
 }
 body span.logo-container h1.logo {
   height: 20px;
@@ -83,26 +84,26 @@ body div.setting-container {
   display: flex;
 }
 body div.setting-container span.setting-items {
-    height: 40px;
-    width: 40px;
-    display: inline-block;
-    cursor: pointer;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  cursor: pointer;
 }
 body div.setting-container span.setting-items:hover {
   background-color: darkgreen;
 }
 body div.setting-container span.setting-items i.material-icons {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-    margin-top: 5px;
-    position: relative;
-    display: inline-block;
-    height: 40px;
-    width: 40px;
-    color: white;
-    font-size: 28px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: 5px;
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  color: white;
+  font-size: 28px;
 }
 body div.setting-container span.setting-items i.fas {
   position: relative;
@@ -178,75 +179,104 @@ body div.inner aside#side-nav div#nav-content ul li span {
   display: inline-block;
   width: 90px;
 }
-
 body div.inner aside#side-nav div#nav-content ul li a {
-    cursor: pointer;
+  cursor: pointer;
 }
-
 body div.inner aside#side-nav div#nav-content ul li span.nav-unshown {
-    display: none;
+  display: none;
 }
-
 body div.inner main {
-    height: -webkit-calc(100vh - 40px);
-    width: 100%;
+  height: -webkit-calc(100vh - 40px);
+  width: 100%;
 }
-
 body div#cover {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(200, 200, 200, 0.4);
-    z-index: 9998;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.4);
+  z-index: 9998;
 }
-
 body div#cover div#new-directory {
-    width: 50%;
-    height: 200px;
-    background-color: white;
-    box-shadow: 0 0 5px gray;
-    position: relative;
+  width: 300px;
+  height: 150px;
+  background-color: white;
+  box-shadow: 0 0 10px gray;
+  position: relative;
 }
-
 body div#cover div#new-directory div.close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    border: 1px solid white;
-    border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 50%;
 }
-
 body div#cover div#new-directory div.close-button:hover {
-    background-color: gainsboro;
+  background-color: gainsboro;
 }
-
 body div#cover div#new-directory div.close-button:before {
-    content: "";
-    position: absolute;
-    top: 13px;
-    left: 3px;
-    transform: rotate(45deg);
-    width: 22px;
-    height: 2px;
-    background-color: mediumseagreen;
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 3px;
+  transform: rotate(45deg);
+  width: 22px;
+  height: 2px;
+  background-color: mediumseagreen;
 }
-
 body div#cover div#new-directory div.close-button:after {
-    content: "";
-    position: absolute;
-    top: 13px;
-    left: 3px;
-    transform: rotate(-45deg);
-    width: 22px;
-    height: 2px;
-    background-color: mediumseagreen;
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 3px;
+  transform: rotate(-45deg);
+  width: 22px;
+  height: 2px;
+  background-color: mediumseagreen;
+}
+body div#cover div#new-directory div.popup-title {
+  height: 40px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-weight: 700;
+  color: dimgray;
+  border-bottom: 1px solid gainsboro;
+}
+body div#cover div#new-directory div.form-container {
+  margin-top: 25px;
+  width: 250px;
+  height: 40px;
+  margin-left: 20px;
+}
+body div#cover div#new-directory div.form-container input[type=text] {
+  height: 100%;
+  width: 100%;
+  border: 2px solid rgba(60, 180, 113, 0.7);
+  border-radius: 4px;
+  font-size: 15px;
+  padding-left: 3px;
+  outline: none;
+  font-family: Serif;
+}
+body div#cover div#new-directory div.form-container input[type=text]:focus {
+  background-color: whitesmoke;
+}
+body div#cover div#new-directory input[type=submit] {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  background-color: white;
+  color: black;
+  font-size: 17px;
+  padding: 0 2px;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -35,11 +35,11 @@ public class JsonResponse implements Jsonable<JsonResponse.Encoded> {
     // 送信専用のため、Convertibleは実装しない
     public class Encoded extends Encodable {
 
-        private final String _valid;
+        private final boolean _valid;
         private final String message;
 
         Encoded(final JsonResponse requestResult) {
-            this._valid = String.valueOf(requestResult._valid);
+            this._valid = requestResult._valid;
             this.message = encode(requestResult.message);
         }
 

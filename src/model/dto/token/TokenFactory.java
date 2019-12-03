@@ -2,6 +2,7 @@ package model.dto.token;
 
 import com.google.gson.Gson;
 import controller.util.ServletUtil;
+import model.dto.code.CodeFactory;
 
 public class TokenFactory {
 
@@ -21,7 +22,8 @@ public class TokenFactory {
 
     static String generateToken() {
         // TODO token実装する
-        return null;
+        final String token=CodeFactory.generateAuthCode();
+        System.out.println("generateToken!!! : "+token); // TODO debug code here.
+        return token;
     }
-
 }

@@ -28,6 +28,12 @@ public class AsynchronousHttpServlet extends AbstractHttpServletWrapper {
     }
 
     protected boolean isValidToken(final HttpSession session, final Encodable encoded) {
-        return encoded.getToken().equals(session.getAttribute("TOKEN"));
+        if(encoded.getToken().equals(session.getAttribute("TOKEN"))) {
+            System.out.println("Valid Token!");
+            return true;
+        }else {
+            System.out.println("Invalid Token!");
+            return false;
+        }
     }
 }

@@ -20,13 +20,17 @@ public class Questions implements Jsonable<Questions.Encoded> {
         return questions;
     }
 
+    public Encoded getEncoded() {
+        return encoded;
+    }
+
     @Override
     public String toJson() {
         return toJson(encoded);
     }
 
     // 送信専用のため、Convertibleは実装しない
-    class Encoded extends Encodable {
+    public class Encoded extends Encodable {
 
         private final String[] questions;
 

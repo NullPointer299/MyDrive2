@@ -5,6 +5,7 @@ import model.dto.code.Code;
 import model.dto.code.CodeFactory;
 import model.dto.response.JsonFactory;
 import model.dto.response.JsonResponse;
+import model.dto.token.Token;
 import model.dto.token.TokenFactory;
 
 import javax.servlet.ServletException;
@@ -23,11 +24,13 @@ public class ServletAuthCode extends AsynchronousHttpServlet {
         final String jsonRequest = receiveJsonRequest(request);
         final Code.Encoded codeEncoded = CodeFactory.deserialize(jsonRequest);
         if (isValidToken(session, codeEncoded)) {
+            final Token token=TokenFactory.createToken();
             final Code code = codeEncoded.toParent();
             final boolean status =
                     code.equals((session.getAttribute("CODE")));
             final JsonResponse jsonResponse = JsonFactory.createJsonResponse(status);
-            jsonResponse.getEncoded().setToken(TokenFactory.createToken());
+            jsonResponse.getEncoded().setToken(token);
+            session.setAttribute("TOKEN", token);
             sendJsonResponse(response, jsonResponse.toJson());
         } else {
             // トークンが不正なときの処理

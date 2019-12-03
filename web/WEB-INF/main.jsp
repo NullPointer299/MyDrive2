@@ -37,7 +37,7 @@
     <script src="../js/jquery-3.4.1.min.js"></script>
     <!-- 自分のcss , js の読み込み-->
     <script>
-        const origin_tree = JSON.parse("<%=tm.getSubTree().toJson().replaceAll("\"", "\\\\\"")%>");
+        const origin_tree = JSON.parse("{\"1\":[{\"id\":\"2\",\"parentId\":\"1\",\"name\":\"nullpo299\",\"isDirectory\":\"true\"}],\"2\":[{\"id\":\"3\",\"parentId\":\"2\",\"name\":\"super\",\"isDirectory\":\"true\"},{\"id\":\"6\",\"parentId\":\"2\",\"name\":\"outfile\",\"isDirectory\":\"false\"}],\"3\":[{\"id\":\"4\",\"parentId\":\"3\",\"name\":\"multi\",\"isDirectory\":\"true\"}],\"4\":[{\"id\":\"5\",\"parentId\":\"4\",\"name\":\"otinpo\",\"isDirectory\":\"true\"}]}");
         const rootId = decodeURI(origin_tree["1"]["0"].id);
     </script>
     <script src="../myJs/upload.js"></script>
@@ -121,7 +121,7 @@
                         <li>
                             <a>new</a>
                             <ul class="dropdwn_menu">
-                                <li id="new-directory-button">directory</li>
+                                <li id="new-directory-button" class="not-close-action">directory</li>
                             </ul>
                         </li>
                     </ul>
@@ -229,9 +229,13 @@
     </main>
 </div>
 <div id="cover" hidden>
-    <div id="new-directory" hidden>
+    <div id="new-directory" class="not-close-action" hidden>
         <div class="close-button"></div>
-        <div class=""></div>
+        <div class="popup-title not-close-action">New Directory</div>
+        <div class="form-container">
+            <input class="popup-text not-close-action" type="text" placeholder="Directory Name">
+        </div>
+        <input type="submit" value="create">
     </div>
 </div>
 </body>

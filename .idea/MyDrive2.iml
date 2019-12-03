@@ -65,5 +65,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="all" level="application" />
   </component>
 </module>

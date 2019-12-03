@@ -4,6 +4,7 @@ Tokenを受け取って秘密の質問を返します
 package controller.register;
 
 import controller.wrapper.AsynchronousHttpServlet;
+import model.dto.question.Questions;
 import model.dto.question.QuestionsFactory;
 import model.dto.token.Token;
 import model.dto.token.TokenFactory;
@@ -26,7 +27,11 @@ public class ServletGetQuestions extends AsynchronousHttpServlet {
             final String jsonRequest = receiveJsonRequest(request);
             final Token.Encoded tokenEncoded = TokenFactory.deserialize(jsonRequest);
             if (isValidToken(session, tokenEncoded)) {
-                final String jsonResponse = QuestionsFactory.create().toJson();
+                final Token token=TokenFactory.createToken();
+                final Questions questions=QuestionsFactory.create();
+                questions.getEncoded().setToken(token);
+                final String jsonResponse = questions.toJson();
+                session.setAttribute("TOKEN", token);
                 sendJsonResponse(response, jsonResponse);
             } else {
                 // TODO Tokenが不正だったとき

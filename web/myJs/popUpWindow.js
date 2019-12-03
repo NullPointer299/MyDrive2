@@ -1,11 +1,11 @@
 $(function(){
     $(document).on('click','#new-directory-button',function () {
-        console.log('IN');
-        $('#cover').removeAttr('hidden');
-        $('#new-directory').removeAttr('hidden');
+        $('#cover').attr('hidden',false);
+        $('#new-directory').attr('hidden',false);
     });
 
-    $(document).on('click','.close-button, :not(#new-directory)',function () {
+    $(document).on('click','.close-button, :not(.not-close-action)',function (event) {
+        event.stopPropagation();
         $('#cover').attr('hidden',true);
         $('#new-directory').attr('hidden',true);
     });

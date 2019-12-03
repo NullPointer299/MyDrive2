@@ -37,20 +37,24 @@ public class ServletRegister extends SynchronousHttpServlet {
             final String openness = request.getParameter("openness");
             final String token = request.getParameter("token");
 
+            System.out.println(token);
+
             // TODO 値チェックする parseできない値とか
-            if (ServletUtil.nullCheck(
-                    emailAddress, lastName, firstName,
+            if (ServletUtil.nullCheck(emailAddress, lastName, firstName,
                     userId, password, question, answer, openness) &&
                     session.getAttribute("TOKEN").equals(TokenFactory.createToken(token))) {
+                System.out.println("RegisterUser!!!"); // TODO debug code here
                 DAOUsers.registerUser(userId, firstName, lastName,
                         emailAddress, Boolean.parseBoolean(openness),
                         password, Integer.parseInt(question), answer);
                 DAOFiles.createFileEntry(userId, 1, 0, true, true, 1);
-                // リダイレクトのためtrue
+                request.getSession().invalidate();
+                CookieFactory.removeCookie(request, response, AttrCookie.LOGIN);
+                response.sendRedirect(AttrServlet.LOGIN.getUrl(true));
+            }else{
+                // 無効なtokenか不正な引数
+                System.out.println("Invalid Token or Illegal arguments!");
             }
-            request.getSession().invalidate();
-            CookieFactory.removeCookie(request, response, AttrCookie.LOGIN);
-            response.sendRedirect(AttrServlet.LOGIN.getUrl(true));
         } catch (final IOException | SQLException e) {
             e.printStackTrace();
         }
@@ -58,6 +62,8 @@ public class ServletRegister extends SynchronousHttpServlet {
 
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         System.out.println("[GET]ServletRegister!!!");
+        final HttpSession session=request.getSession(true);
+        session.setAttribute("TOKEN", TokenFactory.createToken());
         request.getRequestDispatcher(AttrJsp.REGISTER.getUrl()).forward(request, response);
     }
 }

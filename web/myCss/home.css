@@ -10,12 +10,12 @@ main.home div#resize {
   user-select: none;
 }
 main.home div#resize p#tree-comment {
-    position: absolute;
-    background-color: white;
-    font-size: 12px;
-    z-index: 100;
-    box-shadow: 0 0 3px black;
-    padding: 0 4px;
+  position: absolute;
+  background-color: white;
+  font-size: 12px;
+  z-index: 100;
+  box-shadow: 0 0 3px black;
+  padding: 0 4px;
 }
 main.home div#resize ul {
   list-style: none;
@@ -79,22 +79,22 @@ main.home div#resize ul li a:hover {
   background-color: gainsboro;
 }
 main.home div.content {
-    z-index: 0;
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    height: calc(100vh - 40px);
+  z-index: 0;
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 40px);
 }
 main.home div.content div.tool-bar {
-    height: 30px;
-    width: 100%;
-    border-bottom: lightgray 1px solid;
-    display: flex;
+  height: 30px;
+  width: 100%;
+  border-bottom: lightgray 1px solid;
+  display: flex;
 }
 main.home div.content div.tool-bar span.tool {
-    display: inline-block;
-    height: 100%;
-    min-width: 50px;
+  display: inline-block;
+  height: 100%;
+  min-width: 50px;
 }
 main.home div.content div.tool-bar span.tool:hover {
   background-color: whitesmoke;
@@ -115,44 +115,44 @@ main.home div.content div.tool-bar span.tool ul {
   list-style: none;
 }
 main.home div.content div.tool-bar span.tool ul.parent {
-    height: 30px;
+  height: 30px;
 }
 main.home div.content div.tool-bar span.tool ul.parent a {
-    height: 30px;
+  height: 30px;
 }
 main.home div.content div.tool-bar span.tool ul.parent > li {
-    height: 100%;
-    list-style-type: none;
+  height: 100%;
+  list-style-type: none;
 }
 main.home div.content div.tool-bar span.tool ul.parent > li ul.dropdwn_menu {
-    position: relative;
-    border-right: 2px solid gainsboro;
-    border-bottom: 2px solid gainsboro;
-    display: none;
-    margin-left: -40px;
-    left: 40px;
-    width: 90px;
+  position: relative;
+  border-right: 2px solid gainsboro;
+  border-bottom: 2px solid gainsboro;
+  display: none;
+  margin-left: -40px;
+  left: 40px;
+  width: 90px;
 }
 main.home div.content div.tool-bar span.tool ul.parent > li ul.dropdwn_menu li {
-    background-color: white;
-    padding: 0 3px;
-    box-shadow: 2px 2px 4px gray;
-    height: 30px;
-    font-size: 20px;
-    color: dimgray;
+  background-color: white;
+  padding: 0 3px;
+  box-shadow: 2px 2px 4px gray;
+  height: 30px;
+  font-size: 20px;
+  color: dimgray;
 }
 main.home div.content div.tool-bar span.tool ul.parent > li ul.dropdwn_menu li:hover {
-    background-color: whitesmoke;
+  background-color: whitesmoke;
 }
 main.home div.content div.breadcrumbs-area {
-    width: 100%;
-    height: 25px;
-    overflow: hidden;
-    z-index: -1;
+  width: 100%;
+  height: 25px;
+  overflow: hidden;
+  z-index: -1;
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs {
   height: 100%;
-  margin: 0;
+  margin-top: 2px;
   list-style: none;
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item {
@@ -171,18 +171,19 @@ main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item:no
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs li.breadcrumbs-item a {
   text-decoration: none;
+  color: royalblue;
 }
 main.home div.content div.breadcrumbs-area ol.breadcrumbs li.current a {
   color: darkgray;
   pointer-events: none;
 }
 main.home div.content div#files-area {
-    height: calc(100% - 55px);
-    display: flex;
-    flex-flow: row wrap;
-    align-content: flex-start;
-    overflow: auto;
-    z-index: -1;
+  height: calc(100% - 55px);
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  overflow: auto;
+  z-index: -1;
 }
 main.home div.content div#files-area div.dir {
   z-index: 1;
